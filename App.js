@@ -41,20 +41,28 @@ export default function App() {
   );
 
   return (
-    <ScrollView>
       <View style={styles.container}>
-        <Text>Let this journey begin</Text>
-        <Text>You can make it happen</Text>
-        <Text>Developer Lewis Kipngetich Kemboi</Text>
+          <Text>Let this journey begin</Text>
+          <Text>You can make it happen</Text>
+        <View style={styles.profile}>
+          <Image source={{uri:'https://reactnative.dev/docs/assets/p_cat2.png',}} style={{width:100, height:100}}/>
+          <Text>Developer</Text>
+          <Text>Lewis Kemboi</Text>
+        </View>
       <FlatList
         data={items}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         style={styles.list}
       />
-      <StatusBar style="auto" />
+      <TextInput defaultValue='Enter text ...' 
+        style={{
+          height: 50,
+          borderColor: 'gray',
+          borderWidth: 1,
+        }}/>
+      <StatusBar hidden style="auto" />
       </View>
-      </ScrollView>
   );
 }
 
@@ -65,6 +73,11 @@ const styles = StyleSheet.create({
     padding:10,
     justifyContent: 'center',
     borderRadius:10,
+  },
+  profile: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   innerContainer: {
     alignItems: 'center',
