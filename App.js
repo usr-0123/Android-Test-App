@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, ScrollView, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, Image } from 'react-native';
 
 // Import the local image
 const splashImage = require('./assets/splash.png');
 
-const items = [
+const [ items, setItems ] = useState( [
 {id: 1, First_name: 'John', Last_name: 'Doe', Email_address: 'john.doe@example.com', Physical_address: '123 Main St', Contact_information: '123-456-7890' , DATE_of_birth: '1980-01-15', Department: 'Engineering', Job_title: 'Software Engineer'},
 {id: 2, First_name: 'Jane', Last_name: 'Smith', Email_address: 'jane.smith@example.com', Physical_address: '456 Elm St', Contact_information: '456-789-0123' , DATE_of_birth: '1985-03-20', Department: 'Marketing', Job_title: 'Marketing Manager'},
 {id: 3, First_name: 'Michael', Last_name: 'Johnson', Email_address: 'michael.johnson@example.com', Physical_address: '789 Oak St', Contact_information: '789-012-3456' , DATE_of_birth: '1992-05-10', Department: 'HR', Job_title: 'HR Assistant'},
@@ -23,46 +23,72 @@ const items = [
 {id: 15, First_name: 'James', Last_name: 'Brown', Email_address: 'james.brown@example.com', Physical_address: '987 Maple St', Contact_information: '987-852-9630' , DATE_of_birth: '1990-12-30', Department: 'Engineering', Job_title: 'Systems Analyst'},
 {id: 16, First_name: 'Sophia', Last_name: 'Martinez', Email_address: 'sophia.martinez@example.com', Physical_address: '654 Birch St', Contact_information: '654-159-7530' , DATE_of_birth: '1985-02-14', Department: 'Marketing', Job_title: 'Marketing Director'},
 {id: 17, First_name: 'Mason', Last_name: 'Davis', Email_address: 'mason.davis@example.com', Physical_address: '852 Walnut St', Contact_information: '852-357-4680' , DATE_of_birth: '1987-04-08', Department: 'HR', Job_title: 'HR Director'}
-]
+] )
 
 export default function App() {
 
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Text>First Name: {item.First_name}</Text>
-      <Text>Last Name: {item.Last_name}</Text>
-      <Text>Email_address: {item.Email_address}</Text>
-      <Text>Physical_address: {item.Physical_address}</Text>
-      <Text>Contact_information: {item.Contact_information}</Text>
-      <Text>Date of birth: {item.DATE_of_birth}</Text>
-      <Text>Department: {item.Department}</Text>
-      <Text>Job title: {item.Job_title}</Text>
-    </View>
-  );
+  const [name, setName ] = useState('Lewis')
+  const [age, setAge] = useState('23')
+  const [gender, setGender] = useState('Male')
+
+  const clickHandler = () => {
+    setName('Kipngetich');
+    setAge('24');
+    setGender('Female');
+  }
 
   return (
-      <View style={styles.container}>
-          <Text>Let this journey begin</Text>
-          <Text>You can make it happen</Text>
-        <View style={styles.profile}>
-          <Image source={{uri:'https://reactnative.dev/docs/assets/p_cat2.png',}} style={{width:100, height:100}}/>
-          <Text>Developer</Text>
-          <Text>Lewis Kemboi</Text>
-        </View>
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        style={styles.list}
-      />
-      <TextInput defaultValue='Enter text ...' 
-        style={{
-          height: 50,
-          borderColor: 'gray',
-          borderWidth: 1,
-        }}/>
-      <StatusBar hidden style="auto" />
+    <View style={styles.container}>
+      <Text>Let this journey begin</Text>
+      <Text>You can make it happen</Text>
+      <View style={styles.profile}>
+        <Image source={{uri:'https://reactnative.dev/docs/assets/p_cat2.png',}} style={{width:100, height:100}}/>
+        <Text>Developer</Text>
+        <Text>My name is {name}, I am {age} years old and I am a {gender}</Text>
+          <View>
+            <Button title='Update' onPress={clickHandler}/>
+          </View>
+          <View>
+            <Text>Enter your Name:</Text>
+            <TextInput 
+              style={styles.textInput}
+              placeholder='Enter new name...'
+              onChange={(value) => setName(value)}
+            />
+
+            <Text>Enter your age:</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder='Enter new age...'
+              onChange={(value) => setAge(value)}
+            />
+
+            <Text>Enter your age:</Text>
+            <TextInput
+              placeholder='Enter your age'
+              keyboardType='numeric'
+              onChange={(value) => setName(value)}
+            />
+          </View>
       </View>
+
+      {items.map((item) => {
+        return (
+          <View style={styles.itemContainer} key={item.id}>
+            <Text>First Name: {item.First_name}</Text>
+            <Text>Last Name: {item.Last_name}</Text>
+            <Text>Email_address: {item.Email_address}</Text>
+            <Text>Physical_address: {item.Physical_address}</Text>
+            <Text>Contact_information: {item.Contact_information}</Text>
+            <Text>Date of birth: {item.DATE_of_birth}</Text>
+            <Text>Department: {item.Department}</Text>
+            <Text>Job title: {item.Job_title}</Text>
+          </View>
+        )
+      })}
+      
+      <StatusBar hidden style="auto" />
+    </View>
   );
 }
 
