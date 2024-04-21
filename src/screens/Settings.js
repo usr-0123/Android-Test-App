@@ -1,15 +1,16 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { Text, View } from "react-native";
-import Profile from "./Profile";
-
-const Stack = createNativeStackNavigator();
+import SettingsStyles from "../assets/stylesheets/SettingsStyles";
 
 const Settings = ({navigation}) => {
     return (
         <>
-            <View>
-                <Text onPress={() => navigation.navigate('Profile')} >Profile</Text>
+            <View style={SettingsStyles.container}>
+                <Text style={SettingsStyles.text} onPress={() => navigation.navigate('Profile')} >Profile</Text>
+                <Text style={SettingsStyles.text} onPress={() => navigation.navigate('Notification')}>Notifications</Text>
+                <Text style={SettingsStyles.text} onPress={() => navigation.navigate('Appearance')}>Appearance</Text>
+                <Text style={SettingsStyles.text} onPress={() => navigation.navigate('Security')}>Security</Text>
+                <Text style={SettingsStyles.text} onPress={() => navigation.navigate('About')}>About</Text>
             </View>
         </>
     )

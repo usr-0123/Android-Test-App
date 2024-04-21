@@ -2,18 +2,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 const HomeStyles = StyleSheet.create({
-    container: {
-        display: "flex"
-    },
-    top: {
+    bottom_nav: {
         display: 'flex',
-        alignItems: 'center',
-        padding: 10,
-        color: 'blue',
-        fontWeight: 'bold',
-        fontSize: 24,
-        fontFamily: 'Roboto',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         backgroundColor: 'grey'
+    },
+    nav_buttons: {
+        padding: 20,
     }
   });
 
