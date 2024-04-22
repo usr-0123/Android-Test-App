@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Button } from "react-native";
 import styles from '../assets/stylesheets/HomeStyles.js'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -12,12 +12,26 @@ import Security from "../components/screens/Security.js";
 import Appearance from "../components/screens/Appearance.js";
 import Groups from "./Groups.js";
 import ChatRoom from "../components/screens/chats/ChatRoom.js";
+import { useIsFocused } from "@react-navigation/native";
 
 // import UserList from "./users.js";
 
 const Stack = createNativeStackNavigator();
 
 const Home =( {navigation} ) => {
+    const [ isChatOpen, setIsChatOpen ] = useState(false);
+    const isFocused = useIsFocused();
+
+    const handleIsChatRoomOpen = () => {
+        setIsChatOpen(true)
+    };
+
+    const handleIsChatRoomClose = () => {
+        isChatOpen == false
+    };
+
+    console.log("logged chat room open state", isFocused);
+
     return (
         <>
             <Stack.Navigator>
@@ -36,14 +50,22 @@ const Home =( {navigation} ) => {
                 <Stack.Screen name='About' component={About} options={{title: 'About Settings'}} />
 
                 {/* Pages available in the chats page */}
-                <Stack.Screen name='ChatRoom' component={ChatRoom} options={({ route }) => ({ title: route.params.chatDetails.user.First_name })} />
+                <Stack.Screen name='ChatRoom' component={ChatRoom} 
+                    options={({ route }) => ({ title: route.params.chatDetails.user.First_name })} 
+                    listeners={{
+                        focus: handleIsChatRoomOpen,
+                        blur: handleIsChatRoomClose,
+                    }}
+                />
 
             </Stack.Navigator>
-            <View style={styles.bottom_nav}>
-                <Text style={styles.nav_buttons} onPress={() => navigation.navigate('Chats')}>Chats</Text>
-                <Text style={styles.nav_buttons} onPress={() => navigation.navigate('Groups')} >Groups</Text>
-                <Text style={styles.nav_buttons} onPress={() => navigation.navigate('Settings')}>Settings</Text>
-            </View>
+            {isFocused && (
+                <View style={styles.bottom_nav}>
+                    <Text style={styles.nav_buttons} onPress={() => navigation.navigate('Chats')}>Chats</Text>
+                    <Text style={styles.nav_buttons} onPress={() => navigation.navigate('Groups')} >Groups</Text>
+                    <Text style={styles.nav_buttons} onPress={() => navigation.navigate('Settings')}>Settings</Text>
+                </View>
+            )}
         </>
     )
 }
