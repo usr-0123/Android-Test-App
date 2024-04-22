@@ -1,4 +1,5 @@
-{"Users": [
+{"Users": 
+[
 {
     "Id": 1,
     "First_name": "John",        
@@ -1927,4 +1928,43 @@
     "Department": "HR", 
     "Job_title": "HR Assistant"
 }
-]}
+], "Chats":
+[
+    {
+        "Id": 1,
+        "SenderId": 1,
+        "RecieverId":2
+    },
+    {
+        "Id": 2,
+        "SenderId": 1,
+        "RecieverId":3
+    }
+], "Messages":
+[
+    {
+        "Id": 1,
+        "ChatId": 1,
+        "SenderId":1,
+        "Message": "Hello"
+    },
+    {
+        "Id": 2,
+        "ChatId": 1,
+        "SenderId":2,
+        "Message": "Hello too"
+    },
+    {
+        "Id": 3,
+        "ChatId": 2,
+        "SenderId":1,
+        "Message": "Hello chat 2"
+    },
+    {
+        "Id": 4,
+        "ChatId": 2,
+        "SenderId":3,
+        "Message": "Hello too chat 2"
+    }
+]
+}

@@ -3,10 +3,10 @@ import React, {useState, useEffect} from "react";
 import { View, ScrollView, Text } from "react-native";
 
 // Data
-import data from '../services/json/data.json'
+import data from '../../../services/json/data.json'
 
 // Styles
-import styles from "../../AppStyles";
+import styles from "../../../../AppStyles";
 
 const UserList = () => {
     const [users, setUsers] = useState([])
